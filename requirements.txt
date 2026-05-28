@@ -1,0 +1,11 @@
+# UXBench v1.0 — Minimal runtime dependencies
+#
+# The two top-level scripts (response generation & GRM judge) only need:
+requests>=2.28.0
+tqdm>=4.65.0
+openpyxl>=3.1.0   # only needed if you want to read the *.xlsx result files
+
+# Optional: faster JSON
+# orjson>=3.9.0
+
+# Note: GRM serving requires vLLM separately; see src/README.md

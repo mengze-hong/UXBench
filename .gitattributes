@@ -1,0 +1,17 @@
+# Git LFS — track large benchmark data files (>5 MB each, ~630 MB total)
+# Without LFS, GitHub warns above 50 MB and blocks above 100 MB per file.
+# After cloning, run: `git lfs install` once, then `git lfs pull`.
+
+# Task 2 — model responses (largest set)
+src/experiments/task2_ux_eval/responses/*.jsonl       filter=lfs diff=lfs merge=lfs -text
+src/experiments/task2_ux_eval/results/judge/*.jsonl   filter=lfs diff=lfs merge=lfs -text
+
+# Task 3 — recovery responses + judge
+src/experiments/task3_ux_recovery/responses/*.jsonl                 filter=lfs diff=lfs merge=lfs -text
+src/experiments/task3_ux_recovery/results/judge_results/*.jsonl     filter=lfs diff=lfs merge=lfs -text
+
+# Ensure jsonl/json text files always use LF line endings
+*.jsonl text eol=lf
+*.json  text eol=lf
+*.py    text eol=lf
+*.md    text eol=lf

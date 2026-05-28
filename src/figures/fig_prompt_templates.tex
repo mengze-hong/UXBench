@@ -1,0 +1,72 @@
+\begin{figure*}[!t]
+\centering
+\setlength{\fboxsep}{6pt}
+
+\newcommand{\promptsection}[2]{%
+\par\vspace{0.45em}
+\noindent\fcolorbox{gray!35}{gray!6}{%
+\begin{minipage}{0.96\textwidth}
+\scriptsize
+\textbf{#1}\par
+\vspace{0.35em}
+\ttfamily\scriptsize
+\raggedright
+#2
+\end{minipage}}%
+\par
+}
+
+\promptsection{Task 1 Model Prompt: UX Judge}{
+System: You are a user experience evaluation expert. Your task is to judge whether the AI assistant's response can satisfy the user. Please judge the response quality only based on the given dialogue, user question, and AI response.
+
+\vspace{0.3em}
+Evaluation criteria:\\
+1. Whether it accurately answers the user's question;\\
+2. Whether it is complete and helpful;\\
+3. Whether it understands the user's real intent;\\
+4. Whether the expression is clear and not overly verbose;\\
+5. Whether it has practical value for the user.
+
+\vspace{0.3em}
+Please output JSON only, without explanation:\\
+\{"verdict": 1\} means GOOD / user satisfied;\\
+\{"verdict": 0\} means BAD / user dissatisfied.
+
+\vspace{0.3em}
+History: \{history\}\\
+User Query: \{query\}\\
+Agent Response: \{response\}
+}
+
+\promptsection{Task 2 Model Prompt: UX Eval}{
+System: You are a helpful AI assistant, and you are happy to help everyone answer questions.
+
+\vspace{0.3em}
+\{history messages\}
+
+\vspace{0.3em}
+User: \{query\}
+}
+
+\promptsection{Task 3 Model Prompt: UX Recovery}{
+System: You are an excellent AI assistant helping another AI improve response quality. You will receive a dialogue history, a failed response given by the AI, and the user's complaint. Based on this information, generate a recovery response. Requirements:\\
+1. Sincerely acknowledge the shortcomings of the previous response when necessary;\\
+2. Provide truly valuable and accurate response content;\\
+3. Use a natural and sincere tone, without excessive apology;\\
+4. If the problem is beyond your capability, clearly explain it and provide alternative suggestions.\\
+Directly output the recovery response, without any explanation or prefix.
+
+\vspace{0.3em}
+User:\\
+The following is a dialogue history snippet from recent turns:\\
+\{history\_text\}\\
+The failed response given by the AI:\\
+\{failed\_response\}\\
+The user's complaint:\\
+\{complaint\}\\
+Please generate a better recovery response:
+}
+
+\caption{Prompt templates (translated from Chinese) used for the three UXBench tasks.}
+\label{fig:prompt_templates}
+\end{figure*}
