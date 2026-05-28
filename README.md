@@ -149,14 +149,3 @@ paper's main results table (27 models) reproduces exactly from these files.
 The dataset and code are released for **non-commercial research use only** under
 the terms in `LICENSE`. Model responses are the property of their respective
 providers.
-
-## Citation
-
-```bibtex
-@inproceedings{uxbench2026,
-  title     = {UXBench: A User-Experience Reward Benchmark for Foundation LLMs},
-  author    = {Anonymous},
-  booktitle = {Submitted to EMNLP 2026},
-  year      = {2026}
-}
-```
