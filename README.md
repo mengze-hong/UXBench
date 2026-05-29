@@ -1,23 +1,6 @@
-# 🌟 UXBench
-
-### *Benchmarking User Experience in AI Assistants*
+# 🌟 UXBench: Benchmarking User Experience in AI Assistants
 
 The first user-centric benchmark grounded in **real user feedback signals** (👍 / 👎) collected from a deployed mainstream AI assistant.
-
----
-
-## ✨ Highlights
-
-- 🎯 **Real-world UX signals, not synthetic preferences** — every instance is anchored to actual thumbs-up / thumbs-down feedback from real users on a production assistant.
-- 🧩 **Three interconnected tasks** — *UX Judge* (perception), *UX Eval* (generation), *UX Recovery* (failure repair) — together covering the full lifecycle of a UX-aware assistant.
-- 🤖 **27 frontier LLMs evaluated end-to-end** on every task, covering
-  GPT-5 / 5.x / mini, Claude Opus 4.5 / 4.6 / 4.7 + Sonnet 4.5,
-  Gemini 2.5 / 3.0 / 3.1, DeepSeek R1 / V3 / V3.2 / V4 Pro,
-  Doubao Seed 1.6 / 2.0 Lite / Pro, Hunyuan 3, GLM-5 / 5.1,
-  Kimi K2.5 / K2.6, MiniMax M2.5, Qwen3.6-Plus.
-- 🔬 **Comprehensive ablations (E1–E8)** covering binary-vs-three-class, pointwise / pairwise bias, prompting strategies, reasoning effort, human alignment, cross-benchmark generalization, and recovery strategies.
-- 🔁 **Reproducible by construction** — unified `cid` scheme aligns every record across responses, judges, and ablations.
-- 🛡️ **Privacy-first release** — only AI-generated content is shipped; user queries, reasoning traces, and PII (phone / email / address / ID) have been systematically protected from all released file.
 
 ---
 
@@ -43,23 +26,23 @@ uxbench-v1.0-public/
 └── src/
     ├── README.md
     │
-    ├── 📦 uxbench-dataset/            ← benchmark queries + 200-row public demo
+    ├── 📦 uxbench-dataset/            
     │   ├── README.md
     │   ├── DATASET_STATISTICS.md
-    │   └── ux_eval_demo_200.jsonl     (only file containing user queries)
+    │   └── ux_eval_demo_200.jsonl     
     │
     ├── 🛠️ data_pipeline/              ← thumbs-up/down → cleaned query splits
-    │                                    (paper §3.4 Dataset Construction)
+    │                                    (§3.4 Dataset Construction)
     ├── 🚀 response_generation/        ← unified call_llm harness for 27 models
-    │                                    (paper §B.1 Model Selection & Inference)
+    │                                    (§B.1 Model Selection & Inference)
     ├── 🧠 grm_judge/                  ← trained pointwise GRM (judge for Tasks 2/3)
-    │                                    (paper §B.2 Training Generative Reward Model)
-    ├── 📊 figures/                    ← plotting code that regenerates paper figures
+    │                                    (§B.2 Training Generative Reward Model)
+    ├── 📊 figures/                    ← plotting code
     │
     └── 🧪 experiments/                ← all benchmarked artefacts (frozen)
         ├── README.md
         │
-        ├── task1_ux_judge/            27 × 2,000 records  ← paper §4.1
+        ├── task1_ux_judge/            27 × 2,000 records  ← §4.1
         │   ├── responses/
         │   └── leaderboard.md
         │
