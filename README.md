@@ -46,17 +46,17 @@ uxbench-v1.0-public/
         │   ├── responses/
         │   └── leaderboard.md
         │
-        ├── task2_ux_eval/             27 × 4,900 records  ← paper §4.2
+        ├── task2_ux_eval/             27 × 4,900 records  ← §4.2
         │   ├── responses/
         │   ├── judge/                 27 GRM judge files
         │   └── leaderboard.md
         │
-        ├── task3_ux_recovery/         27 × 500 records    ← paper §4.3
+        ├── task3_ux_recovery/         27 × 500 records    ← §4.3
         │   ├── responses/
         │   ├── judge/                 27 GRM judge files
         │   └── leaderboard.md
         │
-        └── ablations/                 ← paper Appendix C (Full Experimental Results)
+        └── ablations/                 ← Appendix C (Full Experimental Results)
             ├── README.md
             ├── E1_binary_vs_threeclass/           ← §C.1 Binary vs. Three-Class
             ├── E2_prompting_strategies_task1/     ← §C.4 Impact of Prompting Strategies
