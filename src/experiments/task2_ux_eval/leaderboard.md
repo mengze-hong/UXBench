@@ -3,7 +3,7 @@
 > N = 4900 · 27 paper-listed foundation models · judged by the trained pointwise GRM
 
 | Rank | Model | Good% | Valid / Total |
-|------|-------|------:|---------------|
+|---|---|---:|---|
 | 1 | Gemini 3.1 Pro | 57.1% | 4900/4900 |
 | 2 | GLM-5.1 | 56.6% | 4900/4900 |
 | 3 | GLM-5 | 53.0% | 4900/4900 |
