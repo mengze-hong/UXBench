@@ -170,6 +170,14 @@ python -m uvicorn tools.dashboard.app:app --port 8512
 
 ---
 
+## 🔒 Data Statement
+
+**Data source:** The dataset is derived from the Tencent Yuanbao Optimization Program (元宝优化计划), a user feedback initiative where participants voluntarily provided interaction logs for service improvement purposes. All data collection and release procedures comply with applicable privacy regulations and the terms of the program.
+
+**Content warning:** As the dataset reflects real user interactions, it may contain offensive language, profanity, violence, or other sensitive content. Please use with caution.
+
+---
+
 ## ⚖️ License
 
 **Key restrictions:** research use only &nbsp;·&nbsp; no redistribution &nbsp;·&nbsp; no derivative datasets &nbsp;·&nbsp; no commercial use
