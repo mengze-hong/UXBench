@@ -145,7 +145,7 @@ nav {
 }
 .hero h1 span { color: var(--accent); }
 .hero p {
-  max-width: 600px; margin: 0 auto 1.8rem;
+  max-width: 720px; margin: 0 auto 1.8rem;
   color: var(--text-muted); font-size: .975rem; line-height: 1.7;
 }
 
