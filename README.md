@@ -29,7 +29,10 @@ uxbench-v1.0-public/
     ├── 📦 uxbench-dataset/            
     │   ├── README.md
     │   ├── DATASET_STATISTICS.md
-    │   └── ux_eval_demo_200.jsonl     
+    │   ├── uxbench_task1_judge_bad_1k.jsonl
+    │   ├── uxbench_task1_judge_good_1k.jsonl
+    │   ├── uxbench_task2_eval_4900.jsonl
+    │   └── uxbench_task3_recovery_500.jsonl   
     │
     ├── 🛠️ data_pipeline/              ← thumbs-up/down → cleaned query splits
     │                                    (§3.4 Dataset Construction)
@@ -128,4 +131,3 @@ UXBench is a **living benchmark**: the data is updated on a **bi-monthly basis**
 ## 📜 License
 
 The dataset and code are released for **non-commercial research use only** under the terms in [`LICENSE`](LICENSE).
-
