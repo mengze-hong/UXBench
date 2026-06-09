@@ -388,6 +388,15 @@ tbody tr:last-child td { border-bottom: none; }
   font-size: 1rem; font-weight: 800; color: var(--text);
   margin-bottom: .75rem; display: flex; align-items: center; gap: .5rem;
 }
+/* No-tab leaderboard blocks */
+.lb-block {
+  margin-bottom: 2.5rem;
+}
+.lb-task-title {
+  font-size: 1.05rem; font-weight: 800; color: var(--text);
+  margin-bottom: .85rem; display: flex; align-items: center; gap: .5rem;
+  padding-bottom: .5rem; border-bottom: 2px solid var(--accent-light, #d1fae5);
+}
 .t23-meta {
   font-size: .72rem; font-weight: 500; color: var(--text-muted);
   background: var(--bg3); border-radius: 99px; padding: 2px 8px;

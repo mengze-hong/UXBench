@@ -6,7 +6,7 @@
 // ── Task 1: UX Judge (Avg-Acc = (Good-Acc + Bad-Acc) / 2) ──────────────────
 // 26 frontier LLMs + Pointwise GRM (our trained model, shown at top)
 const TASK1_DATA = [
-  { rank:1,  model:"Pointwise GRM",        org:"Ours",      good:82.1, bad:72.4, avg:77.2, trained:true,  date:"2026-05" },
+  { rank:1,  model:"Pointwise GRM (Hunyuan 3)", org:"Ours",      good:82.1, bad:72.4, avg:77.2, trained:true,  date:"2026-05" },
   { rank:2,  model:"Claude Opus 4.7",      org:"Anthropic", good:89.1, bad:61.5, avg:75.3, date:"2026-05" },
   { rank:3,  model:"GPT-5.2",              org:"OpenAI",    good:85.0, bad:65.1, avg:75.0, date:"2026-05" },
   { rank:4,  model:"GPT-5.5",              org:"OpenAI",    good:92.7, bad:55.7, avg:74.2, date:"2026-05" },
@@ -228,6 +228,7 @@ function showTab(tab) {
   document.getElementById(`tab-${tab}`).classList.add("active");
   document.getElementById(`panel-${tab}`).classList.add("active");
 }
+// ── Init ──────────────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   renderTask1(TASK1_DATA);
   renderTask2(TASK2_DATA);
