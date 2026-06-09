@@ -44,7 +44,7 @@
 <!-- Hero -->
 <header class="hero">
   <h1><span>UXBench:</span> Benchmarking User Experience<br/>in AI Assistants</h1>
-  <p>71,584 real thumbs-up / thumbs-down conversations from Tencent Yuanbao &#8212;<br/>the first LLM benchmark grounded in genuine user satisfaction signals.</p>
+  <p>71,584 real thumbs-up / thumbs-down conversations from Tencent Yuanbao &#8212;<br/>the first user-centric LLM benchmark grounded in genuine user satisfaction signals.</p>
   <div class="btn-group">
     <a class="btn btn-primary" href="https://arxiv.org/abs/2606.09570" target="_blank">&#128196; Paper</a>
     <a class="btn btn-outline" href="https://huggingface.co/datasets/mengze-hong/UXBench" target="_blank">&#129303; Dataset</a>
@@ -75,7 +75,7 @@
   </p>
 
   <div class="tabs">    <button class="tab-btn active" id="tab-t1" onclick="showTab('t1')">Task 1 &middot; UX Judge</button>
-    <button class="tab-btn" id="tab-t23" onclick="showTab('t23')">Task 2 &middot; UX Eval &amp; Task 3 &middot; UX Recovery</button>
+    <button class="tab-btn" id="tab-t23" onclick="showTab('t23')">Task 2 &amp; Task 3 &middot; UX Eval &amp; UX Recovery</button>
   </div>
 
   <!-- Task 1 -->
@@ -164,7 +164,13 @@
 <!-- About -->
 <section id="about">
   <h2><span class="icon">&#128218;</span> About UXBench</h2>
-  <p class="section-sub">Why real user feedback changes everything</p>
+
+  <p style="margin:0 0 1.6rem;font-size:.95rem;line-height:1.75;color:var(--text-muted)">
+    UXBench is designed to answer three core research questions:
+    <strong>(1)</strong> how well automated LLM judges predict real user feedback to an AI-generated response;
+    <strong>(2)</strong> whether frontier LLMs can generate high-quality responses for failure-prone user queries; and
+    <strong>(3)</strong> how model capability improvements translate into measurable UX gains.
+  </p>
 
   <div class="findings-grid grid-3">
     <div class="finding-card">
@@ -174,15 +180,9 @@
       real conversations &#8212; capturing what actual users find frustrating or satisfying.</p>
     </div>
     <div class="finding-card">
-      <h3>&#9878;&#65039; Balanced Evaluation</h3>
-      <p>Our core metric &#8212; <span class="highlight">Avg% = (Good-Acc + Bad-Acc) / 2</span> &#8212; rewards
-      models that can identify both good and bad responses, exposing the systematic <em>positive bias</em>
-      present in all current LLM judges.</p>
-    </div>
-    <div class="finding-card">
       <h3>&#128302; Multi-Task Coverage</h3>
       <p>Three complementary tasks: <span class="highlight">UX Judge</span> (discriminative),
-      <span class="highlight">UX Eval</span> (comparative scoring), and
+      <span class="highlight">UX Eval</span> (GRM judge), and
       <span class="highlight">UX Recovery</span> (generative fix) &#8212; covering the full
       quality-assurance cycle.</p>
     </div>
@@ -191,12 +191,6 @@
       <p>A human-validated taxonomy of <span class="highlight">10 failure dimensions</span> and
       <span class="highlight">8 success patterns</span> covering 8 interaction scenarios and 83 domains,
       enabling fine-grained capability diagnosis.</p>
-    </div>
-    <div class="finding-card">
-      <h3>&#129524; Auto-Labeling Pipeline</h3>
-      <p>A 5-stage LLM-powered pipeline processes raw conversations through signal extraction,
-      pre-filtering, miner agent, judge agent, and QA scan &#8212;
-      producing 7,400 high-quality test instances.</p>
     </div>
   </div>
 
@@ -208,7 +202,7 @@
 <section id="findings">
   <h2><span class="icon">&#128269;</span> Key Findings</h2>
   <p class="section-sub">Insights from evaluating 26 frontier LLMs on real-user UX data</p>
-  <div class="findings-grid grid-3">
+  <div class="findings-grid grid-4">
     <div class="finding-card">
       <h3>&#128202; Systematic Positive Bias</h3>
       <p>Every model shows <span class="highlight">Good-Acc &gg; Bad-Acc</span>, with gaps of
@@ -278,36 +272,36 @@
   <h3 style="font-size:.95rem;font-weight:700;color:var(--bad);margin-bottom:.75rem;">&#10060; Failure Modes (BAD)</h3>
   <div class="dim-grid" style="margin-bottom:2rem">
     <div class="dim-card">
-      <div class="dim-icon">&#127919;</div>
-      <div><div class="dim-name">Intent Misalignment</div><div class="dim-pct">38.8%</div><div class="dim-desc">Response addresses the wrong question or ignores user intent.</div></div>
-    </div>
-    <div class="dim-card">
-      <div class="dim-icon">&#10067;</div>
-      <div><div class="dim-name">Missing Information</div><div class="dim-pct">21.5%</div><div class="dim-desc">Key facts, context, or details absent from the response.</div></div>
-    </div>
-    <div class="dim-card">
-      <div class="dim-icon">&#9888;&#65039;</div>
-      <div><div class="dim-name">Low Reliability</div><div class="dim-pct">11.2%</div><div class="dim-desc">Factual errors, hallucinations, or unverifiable claims.</div></div>
-    </div>
-    <div class="dim-card">
-      <div class="dim-icon">&#128444;&#65039;</div>
-      <div><div class="dim-name">Format/Display Issues</div><div class="dim-pct">9.6%</div><div class="dim-desc">Poor formatting, rendering failures, or layout problems.</div></div>
+      <div class="dim-icon">&#128203;</div>
+      <div><div class="dim-name">Verbosity / Redundancy</div><div class="dim-pct">34.3%</div><div class="dim-desc">Response is excessively long, repetitive, or padded with irrelevant content.</div></div>
     </div>
     <div class="dim-card">
       <div class="dim-icon">&#128295;</div>
-      <div><div class="dim-name">Low Practicality</div><div class="dim-pct">11.5%</div><div class="dim-desc">Technically correct but doesn't solve the user's actual problem.</div></div>
+      <div><div class="dim-name">Task Incompleteness</div><div class="dim-pct">24.8%</div><div class="dim-desc">Only part of the user's request was fulfilled; key deliverables are missing.</div></div>
     </div>
     <div class="dim-card">
-      <div class="dim-icon">&#128203;</div>
-      <div><div class="dim-name">Instruction Failure</div><div class="dim-pct">&#8212;</div><div class="dim-desc">Ignores explicit user constraints or formatting instructions.</div></div>
+      <div class="dim-icon">&#127919;</div>
+      <div><div class="dim-name">Intent Misunderstanding</div><div class="dim-pct">11.5%</div><div class="dim-desc">Response addresses the wrong question or ignores user intent.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#9888;&#65039;</div>
+      <div><div class="dim-name">Factual Error</div><div class="dim-pct">11.0%</div><div class="dim-desc">Incorrect facts, hallucinations, or verifiably false information.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#128270;</div>
+      <div><div class="dim-name">Information Reliability Issue</div><div class="dim-pct">10.1%</div><div class="dim-desc">Outdated, unverifiable, or logically flawed information.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#128444;&#65039;</div>
+      <div><div class="dim-name">Instruction / Format Failure</div><div class="dim-pct">2.8%</div><div class="dim-desc">Ignores explicit formatting constraints or structural requirements.</div></div>
     </div>
     <div class="dim-card">
       <div class="dim-icon">&#128201;</div>
-      <div><div class="dim-name">Insufficient Depth</div><div class="dim-pct">&#8212;</div><div class="dim-desc">Response too superficial for the complexity of the question.</div></div>
+      <div><div class="dim-name">Insufficiently Informative</div><div class="dim-pct">2.2%</div><div class="dim-desc">Response too superficial or vague to be practically useful.</div></div>
     </div>
     <div class="dim-card">
-      <div class="dim-icon">&#128165;</div>
-      <div><div class="dim-name">System Error</div><div class="dim-pct">&#8212;</div><div class="dim-desc">Tool failure, broken output, or system-level malfunction.</div></div>
+      <div class="dim-icon">&#128172;</div>
+      <div><div class="dim-name">Emotional Tone Mismatch</div><div class="dim-pct">2.0%</div><div class="dim-desc">Inappropriate tone or lack of empathy in emotionally sensitive contexts.</div></div>
     </div>
   </div>
 
@@ -315,35 +309,35 @@
   <div class="dim-grid">
     <div class="dim-card">
       <div class="dim-icon">&#9989;</div>
-      <div><div class="dim-name">Accurate Answer</div><div class="dim-pct">19.1%</div><div class="dim-desc">Factually correct with verified information.</div></div>
-    </div>
-    <div class="dim-card">
-      <div class="dim-icon">&#128218;</div>
-      <div><div class="dim-name">Comprehensive</div><div class="dim-pct">14.5%</div><div class="dim-desc">Full coverage of all relevant aspects.</div></div>
+      <div><div class="dim-name">Accurate Answering</div><div class="dim-pct">17.4%</div><div class="dim-desc">Factually correct, verified, and directly answers the question.</div></div>
     </div>
     <div class="dim-card">
       <div class="dim-icon">&#129504;</div>
-      <div><div class="dim-name">Knowledge Depth</div><div class="dim-pct">16.0%</div><div class="dim-desc">Expert-level insight beyond surface-level answers.</div></div>
+      <div><div class="dim-name">Knowledge Depth</div><div class="dim-pct">15.4%</div><div class="dim-desc">Expert-level insight beyond surface-level answers.</div></div>
     </div>
     <div class="dim-card">
-      <div class="dim-icon">&#128736;&#65039;</div>
-      <div><div class="dim-name">Actionable Guidance</div><div class="dim-pct">13.2%</div><div class="dim-desc">Concrete, executable steps the user can follow.</div></div>
+      <div class="dim-icon">&#128218;</div>
+      <div><div class="dim-name">Comprehensive Detail</div><div class="dim-pct">13.7%</div><div class="dim-desc">Full coverage of all relevant aspects of the question.</div></div>
     </div>
     <div class="dim-card">
       <div class="dim-icon">&#128161;</div>
-      <div><div class="dim-name">Problem-Solving</div><div class="dim-pct">12.5%</div><div class="dim-desc">Genuinely resolves the underlying user problem.</div></div>
+      <div><div class="dim-name">Problem Solving</div><div class="dim-pct">12.6%</div><div class="dim-desc">Genuinely resolves the underlying user problem.</div></div>
     </div>
     <div class="dim-card">
-      <div class="dim-icon">&#127919;</div>
-      <div><div class="dim-name">Task Completion</div><div class="dim-pct">10.5%</div><div class="dim-desc">Follows all instructions and delivers requested output.</div></div>
+      <div class="dim-icon">&#128736;&#65039;</div>
+      <div><div class="dim-name">Practical Guidance / Actionability</div><div class="dim-pct">12.1%</div><div class="dim-desc">Concrete, executable steps the user can immediately follow.</div></div>
     </div>
     <div class="dim-card">
       <div class="dim-icon">&#10024;</div>
-      <div><div class="dim-name">Creative Generation</div><div class="dim-pct">6.8%</div><div class="dim-desc">High-quality creative content exceeding user expectations.</div></div>
+      <div><div class="dim-name">Creative Generation</div><div class="dim-pct">11.6%</div><div class="dim-desc">High-quality creative content that exceeds user expectations.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#127919;</div>
+      <div><div class="dim-name">Task Completion</div><div class="dim-pct">9.0%</div><div class="dim-desc">Follows all instructions and delivers the requested output in full.</div></div>
     </div>
     <div class="dim-card">
       <div class="dim-icon">&#128172;</div>
-      <div><div class="dim-name">Empathetic Support</div><div class="dim-pct">7.4%</div><div class="dim-desc">Emotionally appropriate, supportive responses.</div></div>
+      <div><div class="dim-name">Empathetic Support</div><div class="dim-pct">8.2%</div><div class="dim-desc">Emotionally appropriate, warm, and supportive responses.</div></div>
     </div>
   </div>
 </section>
@@ -353,7 +347,7 @@
 <!-- Citation -->
 <section id="citation">
   <h2><span class="icon">&#128221;</span> Citation</h2>
-  <p class="section-sub">If you use UXBench in your research, please cite:</p>
+  <p style="margin-bottom:.6rem;font-size:.88rem;color:var(--text-muted)">If you use UXBench in your research, please cite:</p>
   <div class="cite-box">
     <pre>@misc{hong2026uxbench,
   title         = {UXBench: Benchmarking User Experience in AI Assistants},
