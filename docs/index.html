@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UXBench Leaderboard</title>
+  <meta name="description" content="UXBench: A benchmark derived from 71K real user thumbs-up/down feedback to evaluate LLM user experience." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <a class="nav-brand" href="#">
+    <img src="img/yuanbao-logo.png" alt="Yuanbao" class="nav-logo" />
+    <span>UXBench</span>
+    <span class="badge">v1.0</span>
+  </a>
+  <div class="nav-links">
+    <a href="#leaderboard">Leaderboard</a>
+    <a href="#findings">Findings</a>
+    <a href="#pipeline">Pipeline</a>
+    <a href="#dataset">Taxonomy</a>
+    <a href="https://arxiv.org/abs/2606.09570" target="_blank">Paper</a>
+    <a href="https://github.com/mengze-hong/UXBench" target="_blank">GitHub</a>
+  </div>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile nav drawer -->
+<div class="nav-drawer" id="nav-drawer">
+  <a href="#leaderboard">&#127942; Leaderboard</a>
+  <a href="#findings">&#128269; Findings</a>
+  <a href="#pipeline">&#9881;&#65039; Pipeline</a>
+  <a href="#dataset">&#128194; Taxonomy</a>
+  <a href="https://arxiv.org/abs/2606.09570" target="_blank">&#128196; Paper</a>
+  <a href="https://github.com/mengze-hong/UXBench" target="_blank">&#128187; GitHub</a>
+</div>
+
+<!-- Hero -->
+<header class="hero">
+  <h1><span>UXBench:</span> Benchmarking User Experience<br/>in AI Assistants</h1>
+  <p>71,584 real thumbs-up / thumbs-down conversations from Tencent Yuanbao &#8212;<br/>the first LLM benchmark grounded in genuine user satisfaction signals.</p>
+  <div class="btn-group">
+    <a class="btn btn-primary" href="https://arxiv.org/abs/2606.09570" target="_blank">&#128196; Paper</a>
+    <a class="btn btn-outline" href="https://huggingface.co/datasets/mengze-hong/UXBench" target="_blank">&#129303; Dataset</a>
+    <a class="btn btn-outline" href="https://github.com/mengze-hong/UXBench" target="_blank">&#128187; Code</a>
+  </div>
+</header>
+
+<!-- Stats strip -->
+<div class="stats-strip">
+  <div class="stat-item"><span class="num">70K+</span><span class="lbl">Real Conversations</span></div>
+  <div class="stat-sep">&middot;</div>
+  <div class="stat-item"><span class="num">1,000</span><span class="lbl">Task 1 &mdash; UX Judge (Bad)</span></div>
+  <div class="stat-sep">&middot;</div>
+  <div class="stat-item"><span class="num">1,000</span><span class="lbl">Task 1 &mdash; UX Judge (Good)</span></div>
+  <div class="stat-sep">&middot;</div>
+  <div class="stat-item"><span class="num">4,900</span><span class="lbl">Task 2 &mdash; UX Eval</span></div>
+  <div class="stat-sep">&middot;</div>
+  <div class="stat-item"><span class="num">500</span><span class="lbl">Task 3 &mdash; UX Recovery</span></div>
+</div>
+
+<hr class="divider" />
+
+<!-- Leaderboard -->
+<section id="leaderboard">
+  <h2><span class="icon">&#127942;</span> Leaderboard</h2>
+  <p class="section-sub">
+    Last updated: 2026-05-21 &middot; Task 1: N=2,000 &middot; Task 2: N=4,900 &middot; Task 3: N=500
+  </p>
+
+  <div class="tabs">    <button class="tab-btn active" id="tab-t1" onclick="showTab('t1')">Task 1 &middot; UX Judge</button>
+    <button class="tab-btn" id="tab-t23" onclick="showTab('t23')">Task 2 &middot; UX Eval &amp; Task 3 &middot; UX Recovery</button>
+  </div>
+
+  <!-- Task 1 -->
+  <div class="tab-panel active" id="panel-t1">
+    <div class="table-toolbar">
+      <input class="search-box" id="search-t1" type="text" placeholder="Search model or organization&hellip;" />
+      <small style="color:var(--text-muted)">26 frontier models + GRM &middot; N=2,000 &middot; Click headers to sort</small>
+    </div>
+    <div class="table-wrap">
+      <table id="task1-table" data-task="1">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Model</th>
+            <th class="sortable" data-key="good">Good-Acc &#8593;</th>
+            <th class="sortable" data-key="bad">Bad-Acc &#8593;</th>
+            <th class="sortable active" data-key="avg">Avg-Acc &#8593;</th>
+          </tr>
+        </thead>
+        <tbody id="t1-tbody"></tbody>
+      </table>
+    </div>
+    <p style="margin-top:.75rem;font-size:.78rem;color:var(--text-muted)">
+      <strong>Avg-Acc</strong> = (Good-Acc + Bad-Acc) / 2 &#8212; rewards balanced discrimination.
+      <strong>Good-Acc</strong>: recall on 1,000 liked conversations.
+      <strong>Bad-Acc</strong>: recall on 1,000 disliked conversations.
+    </p>
+  </div>
+
+  <!-- Task 2 & 3 combined -->
+  <div class="tab-panel" id="panel-t23">
+    <div class="t23-layout">
+
+      <!-- Task 2 -->
+      <div class="t23-col">
+        <h3 class="t23-heading">Task 2 &middot; UX Eval <span class="t23-meta">N=4,900</span></h3>
+        <div class="table-toolbar">
+          <input class="search-box" id="search-t2" type="text" placeholder="Search&hellip;" />
+        </div>
+        <div class="table-wrap">
+          <table id="task2-table" data-task="2">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Model</th>
+                <th class="sortable active" data-key="good">Good% &#8593;</th>
+              </tr>
+            </thead>
+            <tbody id="t2-tbody"></tbody>
+          </table>
+        </div>
+        <p style="margin-top:.6rem;font-size:.75rem;color:var(--text-muted)">
+          <strong>Good%</strong>: fraction of conversations rated above threshold.
+        </p>
+      </div>
+
+      <!-- Task 3 -->
+      <div class="t23-col">
+        <h3 class="t23-heading">Task 3 &middot; UX Recovery <span class="t23-meta">N=500</span></h3>
+        <div class="table-toolbar">
+          <input class="search-box" id="search-t3" type="text" placeholder="Search&hellip;" />
+        </div>
+        <div class="table-wrap">
+          <table id="task3-table" data-task="3">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Model</th>
+                <th class="sortable active" data-key="good">Recovery Rate &#8593;</th>
+              </tr>
+            </thead>
+            <tbody id="t3-tbody"></tbody>
+          </table>
+        </div>
+        <p style="margin-top:.6rem;font-size:.75rem;color:var(--text-muted)">
+          <strong>Recovery Rate</strong>: improved responses rated as satisfying.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- About -->
+<section id="about">
+  <h2><span class="icon">&#128218;</span> About UXBench</h2>
+  <p class="section-sub">Why real user feedback changes everything</p>
+
+  <div class="findings-grid grid-3">
+    <div class="finding-card">
+      <h3>&#127919; Real-User Signal</h3>
+      <p>Unlike benchmarks relying on expert annotation or synthetic prompts, UXBench is mined from
+      <span class="highlight">38,331 disliked</span> and <span class="highlight">33,253 liked</span>
+      real conversations &#8212; capturing what actual users find frustrating or satisfying.</p>
+    </div>
+    <div class="finding-card">
+      <h3>&#9878;&#65039; Balanced Evaluation</h3>
+      <p>Our core metric &#8212; <span class="highlight">Avg% = (Good-Acc + Bad-Acc) / 2</span> &#8212; rewards
+      models that can identify both good and bad responses, exposing the systematic <em>positive bias</em>
+      present in all current LLM judges.</p>
+    </div>
+    <div class="finding-card">
+      <h3>&#128302; Multi-Task Coverage</h3>
+      <p>Three complementary tasks: <span class="highlight">UX Judge</span> (discriminative),
+      <span class="highlight">UX Eval</span> (comparative scoring), and
+      <span class="highlight">UX Recovery</span> (generative fix) &#8212; covering the full
+      quality-assurance cycle.</p>
+    </div>
+    <div class="finding-card">
+      <h3>&#129395; Failure &amp; Success Taxonomy</h3>
+      <p>A human-validated taxonomy of <span class="highlight">10 failure dimensions</span> and
+      <span class="highlight">8 success patterns</span> covering 8 interaction scenarios and 83 domains,
+      enabling fine-grained capability diagnosis.</p>
+    </div>
+    <div class="finding-card">
+      <h3>&#129524; Auto-Labeling Pipeline</h3>
+      <p>A 6-stage LLM-powered pipeline processes raw conversations through signal extraction,
+      pre-filtering, miner agent, judge agent, QA scan, and golden set construction &#8212;
+      <span class="highlight">~120K LLM calls</span> in total.</p>
+    </div>
+    <div class="finding-card">
+      <h3>&#128202; Training Data</h3>
+      <p>Beyond evaluation, UXBench provides <span class="highlight">38,300 training examples</span>
+      with structured failure/success annotations, enabling fine-tuning of reward models and
+      LLM judges for production UX quality assessment.</p>
+    </div>
+  </div>
+
+</section>
+
+<hr class="divider" />
+
+<!-- Key Findings -->
+<section id="findings">
+  <h2><span class="icon">&#128269;</span> Key Findings</h2>
+  <p class="section-sub">Insights from evaluating 26 frontier LLMs on real-user UX data</p>
+  <div class="findings-grid grid-3">
+    <div class="finding-card">
+      <h3>&#128202; Systematic Positive Bias</h3>
+      <p>Every model shows <span class="highlight">Good-Acc &gg; Bad-Acc</span>, with gaps of
+      <span class="highlight">27&#8211;88 pp</span>. LLMs are biased toward validating responses &#8212;
+      a critical flaw for QA pipelines.</p>
+    </div>
+    <div class="finding-card">
+      <h3>&#127968; Self-Preference Effect</h3>
+      <p>LLM judges exhibit measurable <span class="highlight">in-group favoritism</span>: same-family models
+      score each other higher. Mixed-vendor ensembles produce more calibrated evaluations.</p>
+    </div>
+    <div class="finding-card">
+      <h3>&#128256; Capability &ne; UX</h3>
+      <p>General-capability rankings show <span class="highlight">weak correlation (r=0.31)</span>
+      with UXBench rankings. Strong reasoning does not guarantee a good user experience.</p>
+    </div>
+    <div class="finding-card">
+      <h3>&#127942; Best Balanced Judge</h3>
+      <p><span class="highlight">Claude Opus 4.7</span> achieves 75.3% Avg-Acc &#8212; the only frontier
+      model with Bad-Acc above 60%, showing better resistance to positive bias.</p>
+    </div>
+    <div class="finding-card">
+      <h3>&#9733; Trained Model Wins</h3>
+      <p>Our <span class="highlight">Pointwise GRM</span> (77.2% Avg-Acc) outperforms all frontier LLMs
+      on Task 1, with Good-Acc 82.1% and Bad-Acc 72.4% &#8212; far more balanced.</p>
+    </div>
+    <div class="finding-card">
+      <h3>&#128295; Recovery is Hard</h3>
+      <p>Task 3 recovery rates top out at <span class="highlight">12.8%</span> (Claude Opus 4.6),
+      revealing that generating genuinely improved responses remains an open challenge even for frontier models.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Pipeline -->
+<section id="pipeline">
+  <h2><span class="icon">&#9881;&#65039;</span> Data Pipeline</h2>
+  <p class="section-sub">6-stage auto-labeling pipeline &middot; ~120K LLM calls &middot; ~1.5B tokens</p>
+  <div class="pipeline">
+    <div class="pipe-step">
+      <div class="step-icon">&#128229;</div>
+      <div class="step-name">Stage 0</div>
+      <div class="step-sub">Signal Extraction<br/>71.5K &rarr; 48.6K</div>
+    </div>
+    <div class="pipe-step">
+      <div class="step-icon">&#128270;</div>
+      <div class="step-name">Stage 1</div>
+      <div class="step-sub">Pre-filter<br/>Dedup + Quality</div>
+    </div>
+    <div class="pipe-step">
+      <div class="step-icon">&#9935;&#65039;</div>
+      <div class="step-name">Stage 2</div>
+      <div class="step-sub">Miner Agent<br/>Reason Extraction</div>
+    </div>
+    <div class="pipe-step">
+      <div class="step-icon">&#9878;&#65039;</div>
+      <div class="step-name">Stage 3</div>
+      <div class="step-sub">Judge Agent<br/>5-axis Scoring</div>
+    </div>
+    <div class="pipe-step">
+      <div class="step-icon">&#129514;</div>
+      <div class="step-name">Stage 4</div>
+      <div class="step-sub">QA Full Scan<br/>48.6K &rarr; 45.7K</div>
+    </div>
+    <div class="pipe-step">
+      <div class="step-icon">&#127885;</div>
+      <div class="step-name">Stage 5</div>
+      <div class="step-sub">Golden Test Set<br/>4,000 cases</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Taxonomy -->
+<section id="dataset">
+  <h2><span class="icon">&#128194;</span> Failure &amp; Success Taxonomy</h2>
+  <p class="section-sub">10 failure dimensions (BAD) &middot; 8 success patterns (GOOD) &middot; human-validated &middot; 8 scenarios &middot; 83 domains</p>
+
+  <h3 style="font-size:.95rem;font-weight:700;color:var(--bad);margin-bottom:.75rem;">&#10060; Failure Modes (BAD)</h3>
+  <div class="dim-grid" style="margin-bottom:2rem">
+    <div class="dim-card">
+      <div class="dim-icon">&#127919;</div>
+      <div><div class="dim-name">Intent Misalignment</div><div class="dim-pct">38.8%</div><div class="dim-desc">Response addresses the wrong question or ignores user intent.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#10067;</div>
+      <div><div class="dim-name">Missing Information</div><div class="dim-pct">21.5%</div><div class="dim-desc">Key facts, context, or details absent from the response.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#9888;&#65039;</div>
+      <div><div class="dim-name">Low Reliability</div><div class="dim-pct">11.2%</div><div class="dim-desc">Factual errors, hallucinations, or unverifiable claims.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#128444;&#65039;</div>
+      <div><div class="dim-name">Format/Display Issues</div><div class="dim-pct">9.6%</div><div class="dim-desc">Poor formatting, rendering failures, or layout problems.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#128295;</div>
+      <div><div class="dim-name">Low Practicality</div><div class="dim-pct">11.5%</div><div class="dim-desc">Technically correct but doesn't solve the user's actual problem.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#128203;</div>
+      <div><div class="dim-name">Instruction Failure</div><div class="dim-pct">&#8212;</div><div class="dim-desc">Ignores explicit user constraints or formatting instructions.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#128201;</div>
+      <div><div class="dim-name">Insufficient Depth</div><div class="dim-pct">&#8212;</div><div class="dim-desc">Response too superficial for the complexity of the question.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#128165;</div>
+      <div><div class="dim-name">System Error</div><div class="dim-pct">&#8212;</div><div class="dim-desc">Tool failure, broken output, or system-level malfunction.</div></div>
+    </div>
+  </div>
+
+  <h3 style="font-size:.95rem;font-weight:700;color:var(--good);margin-bottom:.75rem;">&#9989; Success Patterns (GOOD)</h3>
+  <div class="dim-grid">
+    <div class="dim-card">
+      <div class="dim-icon">&#9989;</div>
+      <div><div class="dim-name">Accurate Answer</div><div class="dim-pct">19.1%</div><div class="dim-desc">Factually correct with verified information.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#128218;</div>
+      <div><div class="dim-name">Comprehensive</div><div class="dim-pct">14.5%</div><div class="dim-desc">Full coverage of all relevant aspects.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#129504;</div>
+      <div><div class="dim-name">Knowledge Depth</div><div class="dim-pct">16.0%</div><div class="dim-desc">Expert-level insight beyond surface-level answers.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#128736;&#65039;</div>
+      <div><div class="dim-name">Actionable Guidance</div><div class="dim-pct">13.2%</div><div class="dim-desc">Concrete, executable steps the user can follow.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#128161;</div>
+      <div><div class="dim-name">Problem-Solving</div><div class="dim-pct">12.5%</div><div class="dim-desc">Genuinely resolves the underlying user problem.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#127919;</div>
+      <div><div class="dim-name">Task Completion</div><div class="dim-pct">10.5%</div><div class="dim-desc">Follows all instructions and delivers requested output.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#10024;</div>
+      <div><div class="dim-name">Creative Generation</div><div class="dim-pct">6.8%</div><div class="dim-desc">High-quality creative content exceeding user expectations.</div></div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">&#128172;</div>
+      <div><div class="dim-name">Empathetic Support</div><div class="dim-pct">7.4%</div><div class="dim-desc">Emotionally appropriate, supportive responses.</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Citation -->
+<section id="citation">
+  <h2><span class="icon">&#128221;</span> Citation</h2>
+  <p class="section-sub">If you use UXBench in your research, please cite:</p>
+  <div class="cite-box">
+    <pre>@misc{hong2026uxbench,
+  title         = {UXBench: Benchmarking User Experience in AI Assistants},
+  author        = {Mengze Hong and Xia Zeng and Zeyang Lei and Sheng Wang and
+                   Chen Jason Zhang and Di Jiang and others},
+  year          = {2026},
+  eprint        = {2606.09570},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2606.09570}
+}</pre>
+  </div>
+
+  <div class="btn-group" style="margin-top:1.5rem">
+    <a class="btn btn-outline" href="https://huggingface.co/datasets/mengze-hong/UXBench" target="_blank">&#129303; HuggingFace</a>
+    <a class="btn btn-outline" href="https://github.com/mengze-hong/UXBench" target="_blank">&#11088; GitHub</a>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Footer -->
+<footer>
+  <p>
+    &#129514; <strong>UXBench v1.0</strong> &middot;
+    <a href="https://github.com/mengze-hong/UXBench">GitHub</a> &middot;
+    <a href="https://arxiv.org/abs/2606.09570">arXiv</a> &middot;
+    <a href="mailto:mengze.hong@connect.polyu.hk">Contact</a>
+  </p>
+
+</footer>
+
+<script src="js/leaderboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+# UXBench Evaluation Configuration
+# Used by scripts/run_eval.py and experiments tooling.
+#
+# Dataset files are hosted on HuggingFace (mengze-hong/UXBench).
+# Download them first — see README.md "Download Dataset" section.
+# Default paths below assume files saved under data/ in the repo root.
+
+# ── Task 1: UX Judge ──────────────────────────────────────────────────────────
+# Binary classification: judge each conversation turn as Good (satisfied) or
+# Bad (unsatisfied). Primary UXBench benchmark task.
+# Metric: Avg-Acc = (Good-Acc + Bad-Acc) / 2
+task1_ux_judge:
+  testset:      "data/uxbench_task1_judge_bad_1k.jsonl"   # download from HuggingFace
+  testset_good: "data/uxbench_task1_judge_good_1k.jsonl"  # download from HuggingFace
+  n_bad: 1000
+  n_good: 1000
+  judge_prompt: "src/pipeline/prompts/judge_system.txt"
+  output_dir:   "experiments/results/task1/"
+  metrics: [good_acc, bad_acc, avg_acc]
+
+# ── Task 2: UX Eval ───────────────────────────────────────────────────────────
+# Generate a satisfying response given a user query + dialogue history.
+# Responses scored by Pointwise GRM; metric: Good% (fraction rated above threshold).
+task2_ux_eval:
+  testset:    "data/uxbench_task2_eval_4900.jsonl"        # download from HuggingFace
+  n_samples:  4900
+  output_dir: "experiments/results/task2/"
+  metrics:    [good_pct]
+
+# ── Task 3: UX Recovery ───────────────────────────────────────────────────────
+# Generate an improved response after an explicit user complaint.
+# Metric: Recovery Rate = Good% on complaint turns.
+task3_ux_recovery:
+  testset:    "data/uxbench_task3_recovery_500.jsonl"     # download from HuggingFace
+  n_samples:  500
+  output_dir: "experiments/results/task3/"
+  metrics:    [recovery_rate]
+
+# ── Model registry ────────────────────────────────────────────────────────────
+models:
+  - key: claude_opus_47
+    name: "Claude Opus 4.7"
+    api: anthropic
+  - key: gpt_5
+    name: "GPT-5"
+    api: openai
+  - key: gemini_31_pro
+    name: "Gemini 3.1 Pro"
+    api: google
+
+# ── Runtime settings ──────────────────────────────────────────────────────────
+concurrency: 5   # number of parallel LLM calls
+max_retries: 3   # retries per failed call (exponential backoff)
+timeout: 60      # per-call HTTP timeout in seconds

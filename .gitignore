@@ -4,57 +4,65 @@ __pycache__/
 *$py.class
 *.so
 .Python
-
-# Distribution / packaging
 build/
 dist/
 *.egg-info/
+.eggs/
 *.egg
 
 # Virtual environments
-.env
-.venv
+.venv/
 venv/
-ENV/
 env/
+ENV/
 
-# IDE / editor
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
+# API keys & secrets
+.env
+.env.local
+.env.*.local
+*_api_key*
+*_secret*
 
-# Testing / linting caches
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.coverage
-htmlcov/
+# Large data files — hosted on HuggingFace (mengze-hong/UXBench)
+*.jsonl
+*.json.gz
+*.parquet
+data/
+
+# Experiment outputs
+experiments/results/**/*.jsonl
+experiments/results/**/*.json
+!experiments/results/task1_leaderboard.md
+!experiments/results/task2_leaderboard.json
 
 # Jupyter
 .ipynb_checkpoints/
-
-# Local pipeline outputs (created when running scripts)
-outputs/
-judge_results/
-logs/
-*.log
+*.ipynb
 
 # OS
-Desktop.ini
+.DS_Store
+Thumbs.db
+desktop.ini
 
-# Config / secrets — never commit
-config.local*
-*.key
-*.pem
-.env.local
-.env.*.local
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
 
-# Internal-only / archived (never push to GitHub)
-_archive/
-_build_tools/
-*.bak_pre_rephrase
-*.bak
+# Cache
+.cache/
+*.pkl
+*.pickle
+checkpoint_*.json
+
+# Dashboard outputs
+tools/dashboard/output/
+tools/dashboard/*.html
+
+# Paper build artifacts
+6_paper/**/*.aux
+6_paper/**/*.log
+6_paper/**/*.bbl
+6_paper/**/*.blg
+6_paper/**/*.out

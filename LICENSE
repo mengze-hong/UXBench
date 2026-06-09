@@ -1,145 +1,259 @@
 UXBench Research-Only License Agreement
-Version 1.0, May 2026
+Version 1.1, June 2026
 
-Copyright (c) 2026 The UXBench Authors. All rights reserved.
+Copyright (c) 2026 Zehong Meng and The UXBench Authors.
+All rights reserved.
 
-TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+IMPORTANT — READ CAREFULLY BEFORE USING THIS WORK.
 
-1. DEFINITIONS
+By downloading, accessing, or using any part of this Work, you ("Recipient")
+agree to be legally bound by the terms of this Agreement. If you do not
+agree, you must not use, download, or access the Work.
 
-"License" shall mean the terms and conditions for use, reproduction, and
-distribution as defined in this document.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1.  DEFINITIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-"Licensor" shall mean the copyright owner or entity authorized by the
-copyright owner that is granting the License.
+"Licensor"    Zehong Meng, The Hong Kong Polytechnic University, and any
+              co-authors of the associated publication.
 
-"Work" shall mean the source code, data, model weights, documentation,
-figures, and any other materials made available under this License.
+"Work"        The UXBench benchmark, including but not limited to: all
+              dataset files, evaluation code, pipeline scripts, model
+              weights, documentation, figures, leaderboard data, and any
+              other materials distributed under this License.
 
-"Recipient" shall mean any individual or entity exercising permissions
-granted by this License.
+"Recipient"   Any individual or legal entity exercising rights granted
+              under this License.
 
-"Research Purpose" shall mean non-commercial academic research exclusively
-in the field of language model evaluation, AI assistant quality assessment,
-or user experience benchmarking.
+"Research     Non-commercial academic research conducted at an accredited
+Purpose"      educational or non-profit research institution, limited to
+              the evaluation of language model quality, AI assistant user
+              experience assessment, or reproduction of results published
+              in the associated paper (arXiv:2606.09570).
 
-2. GRANT OF LICENSE
+"Commercial   Any activity conducted for monetary compensation or
+Purpose"      competitive advantage, including use within or on behalf of
+              a for-profit organization, regardless of whether direct
+              payment is involved.
 
-Subject to the terms and conditions of this License, the Licensor hereby
-grants to the Recipient a worldwide, royalty-free, non-exclusive,
-non-transferable, non-sublicensable, revocable license to use the Work
-solely for Research Purposes, subject to the following restrictions.
+"Derivative   Any work that is based upon, derived from, or incorporates
+Work"         the Work or any substantial portion thereof, including but
+              not limited to translations, adaptations, modifications,
+              extensions, or works that incorporate the data or evaluation
+              protocol.
 
-3. RESTRICTIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2.  GRANT OF LICENSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-The Recipient SHALL NOT:
+Subject to the terms and conditions of this Agreement, the Licensor grants
+the Recipient a limited, worldwide, royalty-free, non-exclusive,
+non-transferable, non-sublicensable, revocable license to USE the Work
+solely for Research Purposes as defined above.
 
-(a) Use the Work for any commercial purpose, including but not limited to
-    selling, licensing, or providing paid services based on the Work;
+This grant is strictly personal to the Recipient and confers no right to
+sublicense, transfer, or otherwise make the Work available to others.
 
-(b) Use the Work to train, fine-tune, distill, or otherwise improve any
-    commercial AI model or product;
-
-(c) Redistribute, share, publish, or make the Work available to any third
-    party, in whole or in part, in any form or medium, without prior
-    written consent from the Licensor;
-
-(d) Create derivative works based on the Work for any purpose other than
-    reproducing results described in the associated publication;
-
-(e) Use the Work to identify, re-identify, or de-anonymize any individual
-    whose data may have contributed to the Work;
-
-(f) Use the Work to extract, reconstruct, or infer private user
-    information, conversation content, or behavioral patterns;
-
-(g) Use the Work in any manner that violates applicable laws, regulations,
-    or ethical guidelines;
-
-(h) Remove, alter, or obscure any copyright notices, license terms, or
-    attribution statements included with the Work;
-
-(i) Use the Work for surveillance, profiling, manipulation, or any
-    purpose that may cause harm to individuals or groups;
-
-(j) Reverse engineer, decompile, or attempt to extract training data,
-    user data, or proprietary information from the Work;
-
-(k) Use the Work to develop competing benchmarks or evaluation frameworks
-    for commercial purposes;
-
-(l) Transfer, assign, or sublicense any rights granted under this License
-    to any third party.
-
-4. PERMITTED USES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3.  PERMITTED USES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 The Recipient MAY:
 
-(a) Use the Work to reproduce experimental results described in the
-    associated publication;
+(a) Reproduce experimental results described in arXiv:2606.09570 using
+    the evaluation pipeline provided;
 
-(b) Use the Work to conduct non-commercial academic research in language
-    model evaluation or AI assistant quality assessment;
+(b) Evaluate language models on the benchmark in a non-commercial,
+    academic research context;
 
-(c) Cite and reference the Work in academic publications;
+(c) Modify the evaluation code solely to adapt it to the Recipient's
+    non-commercial research computing environment, provided that any such
+    modifications are not distributed to third parties;
 
-(d) Use the evaluation pipeline code to evaluate models in a
-    non-commercial research setting;
+(d) Cite and reference the Work in academic publications, theses, or
+    conference presentations, provided proper attribution is given
+    (see Section 5);
 
-(e) Modify the code solely for the purpose of adapting it to the
-    Recipient's non-commercial research environment.
+(e) Share evaluation results and derived metrics (e.g., accuracy scores)
+    in academic publications, provided the raw data and dataset files
+    are NOT included or redistributed.
 
-5. ATTRIBUTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4.  RESTRICTIONS — PROHIBITED USES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Any academic publication or presentation that uses or references the Work
-must include appropriate citation as specified in the associated README or
-documentation.
+The Recipient SHALL NOT, without prior written consent from the Licensor:
 
-6. NO WARRANTY
+DISTRIBUTION & REDISTRIBUTION
+(a) Redistribute, share, publish, upload, mirror, or otherwise make the
+    Work or any portion thereof available to any third party, in any form
+    or medium, including but not limited to file-sharing platforms, cloud
+    storage, academic repositories, or open-source hosting services;
+
+(b) Include the Work, or any portion of the dataset files or data samples,
+    in any publicly accessible repository or system;
+
+DERIVATIVE WORKS
+(c) Create, publish, or distribute any Derivative Work based on the Work,
+    for any purpose, including academic, non-commercial, or open-source
+    purposes, without prior written permission from the Licensor;
+
+(d) Use the Work as a foundation, seed, or component to build a new
+    benchmark, dataset, evaluation framework, or leaderboard;
+
+(e) Translate, reformat, augment, or otherwise transform the data into
+    another dataset or resource for distribution;
+
+COMMERCIAL USE
+(f) Use the Work, in whole or in part, for any Commercial Purpose;
+
+(g) Use the Work to train, fine-tune, distill, or otherwise improve any
+    AI model or system intended for commercial deployment;
+
+(h) Integrate the Work into any product, service, or platform offered
+    to third parties for compensation;
+
+PRIVACY & SECURITY
+(i) Attempt to re-identify, de-anonymize, or infer the identity of any
+    individual whose interaction data may have contributed to the Work;
+
+(j) Use the Work to extract, reconstruct, or infer private user
+    information, conversation content, or behavioral patterns beyond
+    what is necessary for the permitted Research Purpose;
+
+(k) Use the Work for surveillance, profiling, psychological manipulation,
+    targeted advertising, or any purpose that may cause harm to
+    individuals or groups;
+
+INTEGRITY
+(l) Remove, alter, or obscure any copyright notice, attribution
+    statement, or license terms accompanying the Work;
+
+(m) Misrepresent the origin of the Work, including claiming authorship
+    or falsely attributing the Work to a different source;
+
+(n) Transfer, assign, or sublicense any rights granted under this
+    License to any third party.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5.  ATTRIBUTION REQUIREMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Any academic publication, presentation, or report that uses or references
+the Work must include the following citation:
+
+    @article{meng2026uxbench,
+      title   = {UXBench: Benchmarking User Experience in AI Assistants},
+      author  = {Meng, Zehong},
+      year    = {2026},
+      url     = {https://arxiv.org/abs/2606.09570}
+    }
+
+Failure to provide proper attribution constitutes a breach of this License.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6.  DATA PRIVACY AND ETHICS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+The Work is derived from anonymized real user interactions. The Recipient
+expressly acknowledges and agrees to:
+
+(a) Treat all data with appropriate sensitivity and in compliance with
+    applicable data protection regulations (including but not limited to
+    GDPR, PIPL, and CCPA where applicable);
+
+(b) Immediately notify the Licensor at mengze.hong@connect.polyu.hk upon
+    inadvertent discovery of any potentially personally identifiable
+    information within the Work;
+
+(c) Not combine the Work with other datasets in a manner that enables
+    re-identification of individuals;
+
+(d) Comply with all applicable ethical review requirements at the
+    Recipient's institution before using the Work.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7.  NO WARRANTY; LIMITATION OF LIABILITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL
-THE LICENSOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN
-CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS IN THE WORK.
+IMPLIED, INCLUDING WITHOUT LIMITATION ANY WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, ACCURACY, COMPLETENESS, OR
+NON-INFRINGEMENT.
 
-7. DATA PRIVACY
+IN NO EVENT SHALL THE LICENSOR BE LIABLE TO ANY PARTY FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL
+DAMAGES (INCLUDING BUT NOT LIMITED TO LOSS OF DATA, LOSS OF PROFITS, OR
+BUSINESS INTERRUPTION) ARISING OUT OF OR IN CONNECTION WITH THE USE OF
+OR INABILITY TO USE THE WORK, EVEN IF THE LICENSOR HAS BEEN ADVISED OF
+THE POSSIBILITY OF SUCH DAMAGES.
 
-The Recipient acknowledges that the Work may contain anonymized data
-derived from real user interactions. The Recipient agrees to:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8.  TERMINATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-(a) Not attempt to re-identify any individual from the data;
-(b) Not use the data for any purpose that could harm the privacy or
-    interests of individuals whose interactions contributed to the data;
-(c) Report any inadvertent discovery of personally identifiable
-    information to the Licensor immediately.
+This License terminates automatically and immediately upon any breach of
+its terms by the Recipient, without notice from the Licensor.
 
-8. TERMINATION
+Upon termination, the Recipient must:
+(a) Immediately cease all use of the Work;
+(b) Permanently delete or destroy all copies of the Work in the
+    Recipient's possession or control, including backups and cached
+    copies; and
+(c) Certify compliance with (a) and (b) upon request by the Licensor.
 
-This License shall automatically terminate if the Recipient fails to
-comply with any term or condition herein. Upon termination, the Recipient
-must immediately cease all use of the Work and destroy all copies in their
-possession or control.
+The Licensor also reserves the right to revoke this License at any time,
+for any reason, with 30 days' written notice, except in cases of breach
+where termination is immediate.
 
-The Licensor reserves the right to revoke this License at any time, for
-any reason, with or without notice.
+Sections 4, 5, 6, 7, 9, and 10 survive termination of this License.
 
-9. GOVERNING LAW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+9.  GOVERNING LAW AND DISPUTE RESOLUTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-This License shall be governed by and construed in accordance with
-applicable international intellectual property laws.
+This License shall be governed by and construed in accordance with the
+laws of the Hong Kong Special Administrative Region of the People's
+Republic of China, without regard to its conflict-of-law provisions.
 
-10. ENTIRE AGREEMENT
+Any dispute arising out of or relating to this License shall be subject
+to the exclusive jurisdiction of the courts of Hong Kong SAR.
 
-This License constitutes the entire agreement between the parties with
-respect to the Work and supersedes all prior or contemporaneous
-understandings regarding such subject matter.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+10. ENTIRE AGREEMENT; SEVERABILITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
----
+This License constitutes the entire agreement between the Licensor and the
+Recipient with respect to the Work and supersedes all prior or
+contemporaneous representations, understandings, or agreements relating
+to the subject matter hereof.
 
-BY USING THE WORK, YOU ACKNOWLEDGE THAT YOU HAVE READ THIS LICENSE,
-UNDERSTAND IT, AND AGREE TO BE BOUND BY ITS TERMS AND CONDITIONS.
+If any provision of this License is held to be invalid, illegal, or
+unenforceable under applicable law, such provision shall be modified to
+the minimum extent necessary to make it enforceable, and the remaining
+provisions shall continue in full force and effect.
 
-For licensing inquiries or permission requests, contact the authors
-through the channels specified in the associated publication.
+No waiver of any breach of this License shall be deemed a waiver of any
+subsequent breach.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+11. CONTACT AND PERMISSIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For licensing inquiries, permission requests, or to report privacy
+concerns, contact:
+
+    Zehong Meng
+    The Hong Kong Polytechnic University
+    Email: mengze.hong@connect.polyu.hk
+    Co-contact: zeyanglei@gmail.com
+    Paper: https://arxiv.org/abs/2606.09570
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BY USING, DOWNLOADING, OR ACCESSING THE WORK IN ANY WAY, YOU CONFIRM
+THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE LEGALLY BOUND BY ALL
+TERMS AND CONDITIONS OF THIS LICENSE AGREEMENT.
+
+Copyright (c) 2026 Zehong Meng, The Hong Kong Polytechnic University.
+All rights reserved.

@@ -1,133 +1,187 @@
-# 🌟 UXBench: Benchmarking User Experience in AI Assistants
+<div align="center">
 
-The first user-centric benchmark grounded in **real user feedback signals** (👍 / 👎) collected from a deployed mainstream AI assistant.
+# <img src="docs/img/yuanbao-logo.png" width="36" alt="" style="vertical-align:middle"/> &nbsp;UXBench: Benchmarking User Experience in AI Assistants
 
----
+[![Paper](https://img.shields.io/badge/arXiv-2606.09570-b31b1b?style=flat-square&logo=arxiv)](https://arxiv.org/abs/2606.09570) [![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Dataset-orange?style=flat-square)](https://huggingface.co/datasets/mengze-hong/UXBench) [![Leaderboard](https://img.shields.io/badge/%F0%9F%8F%86%20Leaderboard-Live-green?style=flat-square)](https://mengze-hong.github.io/UXBench) [![License](https://img.shields.io/badge/License-Research%20Only-red?style=flat-square)](LICENSE) [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square)](https://python.org)
 
-## 📚 The three tasks
+**[🏆 Leaderboard](https://mengze-hong.github.io/UXBench) · [📄 Paper](https://arxiv.org/abs/2606.09570) · [🤗 Dataset](https://huggingface.co/datasets/mengze-hong/UXBench)**
 
-| # | Task | What the model is asked to do | N |
-|---|------|-------------------------------|--:|
-| 🧑‍⚖️ **1** | **UX Judge** | Read a (user-turn, response) pair and decide whether the response is **Good** or **Bad** from a UX perspective | **2,000** |
-| ✍️ **2** | **UX Eval** | Generate a response to a real user query that real users found hard to satisfy in the wild | **4,900** |
-| 🛟 **3** | **UX Recovery** | Given a failed assistant response and a user-complaint follow-up turn, write a recovery response the user would accept | **500** |
-
-> **Total**: 7,400 unique instances, 27 models, **3 tasks** — 27 × (2,000 + 4,900 + 500) = **199,800** main-track LLM responses, plus 27 × (4,900 + 500) = **145,800** pointwise GRM judgments on Tasks 2 / 3.
+</div>
 
 ---
 
-## 🗂️ Repository layout
+## 📖 Overview
 
-```text
-uxbench-v1.0-public/
-├── README.md                          ← you are here
-├── LICENSE                            ← non-commercial research license
+UXBench is the first user-centric LLM benchmark grounded in **real user feedback signals**, built from 70K+ thumbs-up and thumbs-down conversations from Tencent Yuanbao. It evaluates LLMs across three UX tasks (Judge, Eval, Recovery) covering 8 interaction scenarios and 83 domains. The goal is to extend LLM benchmarking from capabilities to user-perceived utility, shaping the future success of AI assistants.
+
+<div align="center">
+  <img src="assets/figures/fig_uxbench_overview.png" width="88%" alt="UXBench Overview" />
+</div>
+
+---
+
+## 📊 Dataset Formulation
+
+UXBench defines three evaluation tasks over test sets derived from real interaction logs, totalling 7,400 test instances across 8 interaction scenarios and 83 domains.
+
+| Split | Task | Size | Description | Metric |
+|-------|------|-----:|-------------|--------|
+| Task 1 | UX Judge | 1,000 | Disliked conversations (10 failure dimensions) | Bad-Acc |
+| Task 1 | UX Judge | 1,000 | Liked conversations (8 success patterns) | Good-Acc |
+| Task 2 | UX Eval | 4,900 | Multi-turn conversations, response generation | Good% (GRM-rated) |
+| Task 3 | UX Recovery | 500 | Failed conversations, recovery generation | Recovery Rate (Good%) |
+| **Total** | | **7,400** | 8 scenarios · 83 domains | — |
+
+**Task 1 · UX Judge** evaluates whether a model can correctly classify a response as good or bad. The primary metric is **Avg-Acc = (Good-Acc + Bad-Acc) / 2**, aiming to obtain a well-calibrated model that can accurately identify unsatisfactory responses.
+
+**Task 2 · UX Eval** requires a model to generate a satisfying response given a user query and dialogue history. Responses are scored by a trained GRM (Pointwise GRM).
+
+**Task 3 · UX Recovery** requires a model to repair a failed interaction after an explicit user complaint. **Recovery Rate** measures the fraction of generated responses rated as satisfying by the GRM.
+
+
+### Download Dataset
+
+The test set files are hosted on HuggingFace. Download them before running evaluation:
+
+```python
+from datasets import load_dataset
+
+bad  = load_dataset("mengze-hong/UXBench", "task1_judge_bad",  split="test")
+good = load_dataset("mengze-hong/UXBench", "task1_judge_good", split="test")
+t2   = load_dataset("mengze-hong/UXBench", "task2_eval",       split="test")
+t3   = load_dataset("mengze-hong/UXBench", "task3_recovery",   split="test")
+```
+
+---
+
+## 🗂️ Repository Structure
+
+```
+UXBench/
+├── src/
+│   ├── pipeline/              # Data construction pipeline (6 stages)
+│   │   ├── pipeline.py        # Main orchestrator (ThreadPool)
+│   │   ├── signals.py         # Stage 0: signal extraction
+│   │   ├── prefilter.py       # Stage 1: dedup + quality filter
+│   │   ├── miner.py           # Stage 2: miner agent
+│   │   ├── judge.py           # Stage 3: judge agent (5-axis scoring)
+│   │   ├── qa_full_scan.py    # Stage 4: QA full scan
+│   │   ├── build_golden_testset.py  # Stage 5: golden set construction
+│   │   └── prompts/           # Pipeline system prompts (Chinese)
+│   │       ├── miner_system.txt
+│   │       ├── judge_system.txt
+│   │       └── qa_system.txt
+│   └── utils/
+│       ├── config.py          # API config (env-based, single key)
+│       ├── llm_client.py      # Unified LLM client
+│       ├── checkpoint.py      # Resume-safe checkpointing
+│       ├── data_loader.py     # JSONL I/O helpers
+│       └── prompts.py         # Eval prompts (POINTWISE_GRM + verdict parsing)
+│
+├── scripts/
+│   ├── run_eval.py            # Task 1/2/3 evaluation runner
+│   └── grm_judge/
+│       ├── run_grm_judge_task2.py  # GRM scorer for Task 2
+│       └── run_grm_judge_task3.py  # GRM scorer for Task 3
+│
+├── experiments/
+│   ├── configs/
+│   │   └── eval_config.yaml
+│   └── results/
+│       ├── task1_leaderboard.md
+│       └── task2_leaderboard.json
+│
+├── tools/
+│   └── dashboard/
+│       └── app.py             # FastAPI visualization dashboard
+│
+├── assets/
+│   └── figures/               # Paper figures
+│       ├── fig_uxbench_overview.png
+│       └── fig_task2_timeline.png
+│
+├── docs/                      # GitHub Pages leaderboard
+│   ├── index.html
+│   ├── css/style.css
+│   ├── js/leaderboard.js
+│   └── img/
+│
 ├── requirements.txt
-└── src/
-    ├── README.md
-    │
-    ├── 📦 uxbench-dataset/            
-    │   ├── README.md
-    │   ├── DATASET_STATISTICS.md
-    │   ├── uxbench_task1_judge_bad_1k.jsonl
-    │   ├── uxbench_task1_judge_good_1k.jsonl
-    │   ├── uxbench_task2_eval_4900.jsonl
-    │   └── uxbench_task3_recovery_500.jsonl   
-    │
-    ├── 🛠️ data_pipeline/              ← thumbs-up/down → cleaned query splits
-    │                                    (§3.4 Dataset Construction)
-    ├── 🚀 response_generation/        ← unified call_llm harness for 27 models
-    │                                    (§B.1 Model Selection & Inference)
-    ├── 🧠 grm_judge/                  ← trained pointwise GRM (judge for Tasks 2/3)
-    │                                    (§B.2 Training Generative Reward Model)
-    ├── 📊 figures/                    ← plotting code
-    │
-    └── 🧪 experiments/                ← all benchmarked artefacts (frozen)
-        ├── README.md
-        │
-        ├── task1_ux_judge/            27 × 2,000 records  ← §4.1
-        │   ├── responses/
-        │   └── leaderboard.md
-        │
-        ├── task2_ux_eval/             27 × 4,900 records  ← §4.2
-        │   ├── responses/
-        │   ├── judge/                 27 GRM judge files
-        │   └── leaderboard.md
-        │
-        ├── task3_ux_recovery/         27 × 500 records    ← §4.3
-        │   ├── responses/
-        │   ├── judge/                 27 GRM judge files
-        │   └── leaderboard.md
-        │
-        └── ablations/                 ← Appendix C (Full Experimental Results)
-            ├── README.md
-            ├── E1_binary_vs_threeclass/           ← §C.1 Binary vs. Three-Class
-            ├── E2_prompting_strategies_task1/     ← §C.4 Impact of Prompting Strategies
-            ├── E3_reasoning_efforts_task1/        ← §C.5 Impact of Reasoning Efforts
-            ├── E3_reasoning_efforts_task2/        ← §C.5 Impact of Reasoning Efforts
-            ├── E3_reasoning_efforts_task3/        ← §C.5 Impact of Reasoning Efforts
-            ├── E4_bias_analysis/                  ← §C.2 Pointwise Bias
-            ├── E4_pairwise_vs_pointwise/          ← §C.2 Pairwise Bias
-            ├── E5_human_alignment/                ← §C.6 GRM Alignment with Humans
-            ├── E6_cross_benchmark_english/        ← §C.8 Cross-Benchmark Generalization
-            ├── E7_system_prompt_task2/            ← §C.4 (Task 2 system prompts)
-            └── E8_recovery_prompt_strategy_task3/ ← §C.7 Failure Recovery Strategies
+├── .gitignore
+├── LICENSE
+└── README.md
 ```
 
 ---
 
-## 📐 Data schemas
+## 🚀 Quick Start
 
-Every released `*.jsonl` is one JSON object per line.
+### 1. Install
 
-### 🧑‍⚖️ Task 1 — `task1_ux_judge/responses/<model>.jsonl`
-```json
-{
-  "cid":          "uxbench_ux_judge_0001",
-  "model":        "claude-opus-4.7",
-  "ground_truth": 1,            // +1 = Good (👍), -1 = Bad (👎)
-  "difficulty":   "medium",     // easy / medium / hard
-  "verdict":      1,            // model's predicted label
-  "score":        0.92,
-  "tokens":       412,
-  "latency_s":    3.51
-}
+```bash
+git clone https://github.com/mengze-hong/UXBench
+cd UXBench
+pip install -r requirements.txt
 ```
 
-### ✍️ Task 2 — `task2_ux_eval/responses/<model>.jsonl`
-```json
-{
-  "cid":                "uxbench_ux_eval_0001",
-  "model":              "gpt-5.5",
-  "generated_response": "<the model's answer>",
-  "tokens":             812,
-  "latency_s":          5.93
-}
+### 2. Configure API key
+
+```bash
+export OPENAI_API_KEY=sk-...
+# Optional: custom base URL for non-OpenAI providers
+# export OPENAI_API_BASE=https://your-endpoint/v1
 ```
 
-### ⚖️ GRM judge — `task{2,3}_*/judge/judge_<model>.jsonl`
-```json
-{
-  "cid":          "uxbench_ux_eval_0001",
-  "judged_model": "gpt-5.5",
-  "verdict":      1,            // GRM verdict (+1 Good / -1 Bad)
-  "score":        0.78,
-  "good_logprob": -0.24,
-  "bad_logprob":  -1.65,
-  "grm_ok":       true,
-  "latency_s":    0.42
+### 3. Run Evaluation
+
+```bash
+# Task 1: UX Judge
+python scripts/run_eval.py \
+  --task task1_ux_judge \
+  --model claude-opus-4.7 \
+  --config experiments/configs/eval_config.yaml
+
+# Dry run (first 10 examples only)
+python scripts/run_eval.py --task task1_ux_judge --model claude-opus-4.7 --dry-run
+```
+
+### 4. Launch Dashboard
+
+```bash
+python -m uvicorn tools.dashboard.app:app --port 8512
+```
+
+---
+
+## 📝 Citation
+
+```bibtex
+@misc{hong2026uxbench,
+  title         = {UXBench: Benchmarking User Experience in AI Assistants},
+  author        = {Mengze Hong and Xia Zeng and Zeyang Lei and Sheng Wang and
+                   Chen Jason Zhang and Di Jiang and others},
+  year          = {2026},
+  eprint        = {2606.09570},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2606.09570}
 }
 ```
 
 ---
 
-## 📅 Maintenance
+## ⚖️ License
 
-UXBench is a **living benchmark**: the data is updated on a **bi-monthly basis** so that the test set keeps tracking the evolving distribution of real user queries. Each release is versioned (this is `v1.0-public`).
+**Key restrictions:** research use only &nbsp;·&nbsp; no redistribution &nbsp;·&nbsp; no derivative datasets &nbsp;·&nbsp; no commercial use
 
+Please contact [mengze.hong@connect.polyu.hk](mailto:mengze.hong@connect.polyu.hk) and [zeyanglei@gmail.com](mailto:zeyanglei@gmail.com) for permission-related matters.
 
 ---
 
-## 📜 License
-
-The dataset and code are released for **non-commercial research use only** under the terms in [`LICENSE`](LICENSE).
+<div align="center">
+  <sub>
+    <a href="https://mengze-hong.github.io/UXBench">🏆 Leaderboard</a> &nbsp;·&nbsp;
+    <a href="https://arxiv.org/abs/2606.09570">📄 arXiv</a> &nbsp;·&nbsp;
+    <a href="https://huggingface.co/datasets/mengze-hong/UXBench">🤗 Dataset</a>
+  </sub>
+</div>
