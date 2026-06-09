@@ -176,6 +176,8 @@ python -m uvicorn tools.dashboard.app:app --port 8512
 
 **Content warning:** As the dataset reflects real user interactions, it may contain offensive language, profanity, violence, or other sensitive content. Please use with caution.
 
+**Privacy:** This dataset may include information derived from real users. While efforts have been made to anonymize sensitive data, privacy risks may remain. You must not use this dataset to identify, re-identify, contact, profile, track, or infer the identity of any individual. Use of this dataset indicates your agreement to comply with all applicable privacy, data protection, and research ethics requirements.
+
 ---
 
 ## ⚖️ License
