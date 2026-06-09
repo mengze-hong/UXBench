@@ -61,12 +61,12 @@ UXBench/
 ├── src/
 │   ├── pipeline/              # Data construction pipeline (6 stages)
 │   │   ├── pipeline.py        # Main orchestrator (ThreadPool)
-│   │   ├── signals.py         # Stage 0: signal extraction
-│   │   ├── prefilter.py       # Stage 1: dedup + quality filter
-│   │   ├── miner.py           # Stage 2: miner agent
-│   │   ├── judge.py           # Stage 3: judge agent (5-axis scoring)
-│   │   ├── qa_full_scan.py    # Stage 4: QA full scan
-│   │   ├── build_golden_testset.py  # Stage 5: golden set construction
+│   │   ├── signals.py         # Stage 1: signal extraction
+│   │   ├── prefilter.py       # Stage 2: dedup + quality filter
+│   │   ├── miner.py           # Stage 3: miner agent
+│   │   ├── judge.py           # Stage 4: judge agent (5-axis scoring)
+│   │   ├── qa_full_scan.py    # Stage 5: QA full scan
+│   │   ├── build_golden_testset.py  # sampling helper
 │   │   └── prompts/           # Pipeline system prompts (Chinese)
 │   │       ├── miner_system.txt
 │   │       ├── judge_system.txt

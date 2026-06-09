@@ -1,7 +1,7 @@
 # src/pipeline/
 
-The 6-stage auto-labeling pipeline that converts raw AI assistant interaction logs into
-the UXBench golden test set.
+The 5-stage auto-labeling pipeline that converts raw AI assistant interaction logs into
+the UXBench test set.
 
 ## Purpose
 
@@ -21,12 +21,11 @@ each stage (`failure_dimension`, `judge_scores`, `difficulty`, etc.).
 | File | Stage | Description |
 |------|-------|-------------|
 | `pipeline.py` | Orchestrator | Main entry point. Runs all stages sequentially using `ThreadPoolExecutor` for parallel LLM calls. |
-| `signals.py` | Stage 0 | **Signal extraction** — parses raw interaction logs and reconstructs feedback turns (dislike signals, explicit complaints). |
-| `prefilter.py` | Stage 1 | **Pre-filter** — deduplication by conversation hash and basic quality thresholds (length, language, completeness). |
-| `miner.py` | Stage 2 | **Miner Agent** — LLM-powered extraction of failure/success reasons per turn. Outputs `failure_dimension` and `miner_explanation` fields. |
-| `judge.py` | Stage 3 | **Judge Agent** — LLM-based 5-axis quality scoring (`query_completeness`, `signal_credibility`, `representativeness`, `severity`, `annotation_clarity`). |
-| `qa_full_scan.py` | Stage 4 | **QA Full Scan** — removes near-duplicate cases, edge cases that require missing context/images, and low-quality annotations. |
-| `build_golden_testset.py` | Stage 5 | **Golden Test Set** — stratified sampling across failure dimensions and difficulty levels to produce the final 7,400 test cases. |
+| `signals.py` | Stage 1 | **Signal extraction** — parses raw interaction logs and reconstructs feedback turns (dislike signals, explicit complaints). |
+| `prefilter.py` | Stage 2 | **Pre-filter** — deduplication by conversation hash and basic quality thresholds (length, language, completeness). |
+| `miner.py` | Stage 3 | **Miner Agent** — LLM-powered extraction of failure/success reasons per turn. Outputs `failure_dimension` and `miner_explanation` fields. |
+| `judge.py` | Stage 4 | **Judge Agent** — LLM-based 5-axis quality scoring (`query_completeness`, `signal_credibility`, `representativeness`, `severity`, `annotation_clarity`). |
+| `qa_full_scan.py` | Stage 5 | **QA Full Scan** — removes near-duplicate cases, edge cases that require missing context/images, and low-quality annotations. |
 | `postprocess.py` | Post | Post-processing utilities applied after the main pipeline (field cleanup, normalization). |
 | `dim_normalize.py` | Post | Normalizes free-text failure dimension labels to a canonical taxonomy. |
 | `quality_enhance.py` | Post | Data quality enhancement: enriches records with additional metadata and quality signals. |
@@ -35,7 +34,7 @@ each stage (`failure_dimension`, `judge_scores`, `difficulty`, etc.).
 | `fix_label_normalization.py` | Post | One-off fix for label normalization inconsistencies found during QA. |
 | `fix_needs_context.py` | Post | Identifies and marks records that require external context unavailable to an evaluator. |
 | `generate_benchmark.py` | Final | Generates the final benchmark JSONL files from the processed golden set. |
-| `qa_agent.py` | Agent | QA agent implementation used by Stage 4 full scan. |
+| `qa_agent.py` | Agent | QA agent implementation used by Stage 5 full scan. |
 | `trace_runner.py` | Runner | Trace-based runner that replays recorded pipeline traces for debugging. |
 | `llm_client.py` | Utility | Pipeline-local LLM client wrapper (thin shim over `utils/llm_client.py`). |
 

@@ -194,15 +194,9 @@
     </div>
     <div class="finding-card">
       <h3>&#129524; Auto-Labeling Pipeline</h3>
-      <p>A 6-stage LLM-powered pipeline processes raw conversations through signal extraction,
-      pre-filtering, miner agent, judge agent, QA scan, and golden set construction &#8212;
-      <span class="highlight">~120K LLM calls</span> in total.</p>
-    </div>
-    <div class="finding-card">
-      <h3>&#128202; Training Data</h3>
-      <p>Beyond evaluation, UXBench provides <span class="highlight">38,300 training examples</span>
-      with structured failure/success annotations, enabling fine-tuning of reward models and
-      LLM judges for production UX quality assessment.</p>
+      <p>A 5-stage LLM-powered pipeline processes raw conversations through signal extraction,
+      pre-filtering, miner agent, judge agent, and QA scan &#8212;
+      producing 7,400 high-quality test instances.</p>
     </div>
   </div>
 
@@ -254,37 +248,32 @@
 <!-- Pipeline -->
 <section id="pipeline">
   <h2><span class="icon">&#9881;&#65039;</span> Data Pipeline</h2>
-  <p class="section-sub">6-stage auto-labeling pipeline &middot; ~120K LLM calls &middot; ~1.5B tokens</p>
+  <p class="section-sub">5-stage auto-labeling pipeline &middot; ~1.5B tokens processed</p>
   <div class="pipeline">
     <div class="pipe-step">
       <div class="step-icon">&#128229;</div>
-      <div class="step-name">Stage 0</div>
+      <div class="step-name">Stage 1</div>
       <div class="step-sub">Signal Extraction<br/>71.5K &rarr; 48.6K</div>
     </div>
     <div class="pipe-step">
       <div class="step-icon">&#128270;</div>
-      <div class="step-name">Stage 1</div>
+      <div class="step-name">Stage 2</div>
       <div class="step-sub">Pre-filter<br/>Dedup + Quality</div>
     </div>
     <div class="pipe-step">
       <div class="step-icon">&#9935;&#65039;</div>
-      <div class="step-name">Stage 2</div>
+      <div class="step-name">Stage 3</div>
       <div class="step-sub">Miner Agent<br/>Reason Extraction</div>
     </div>
     <div class="pipe-step">
       <div class="step-icon">&#9878;&#65039;</div>
-      <div class="step-name">Stage 3</div>
+      <div class="step-name">Stage 4</div>
       <div class="step-sub">Judge Agent<br/>5-axis Scoring</div>
     </div>
     <div class="pipe-step">
       <div class="step-icon">&#129514;</div>
-      <div class="step-name">Stage 4</div>
-      <div class="step-sub">QA Full Scan<br/>48.6K &rarr; 45.7K</div>
-    </div>
-    <div class="pipe-step">
-      <div class="step-icon">&#127885;</div>
       <div class="step-name">Stage 5</div>
-      <div class="step-sub">Golden Test Set<br/>4,000 cases</div>
+      <div class="step-sub">QA Full Scan<br/>48.6K &rarr; 7,400</div>
     </div>
   </div>
 </section>

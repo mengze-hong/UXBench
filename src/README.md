@@ -13,11 +13,10 @@ Source code for the UXBench data pipeline and evaluation utilities.
 
 | Stage | Script | Description |
 |-------|--------|-------------|
-| 0 | `pipeline/signals.py` | Signal extraction — reconstruct feedback turns from raw logs |
-| 1 | `pipeline/prefilter.py` | Pre-filter — deduplication and quality thresholds |
-| 2 | `pipeline/miner.py` | Miner Agent — extract failure/success reasons per turn |
-| 3 | `pipeline/judge.py` | Judge Agent — 5-axis quality scoring |
-| 4 | `pipeline/qa_full_scan.py` | QA Full Scan — remove duplicates and edge cases |
-| 5 | `pipeline/build_golden_testset.py` | Golden Test Set — stratified sampling to produce final 7,400 test cases |
+| 1 | `pipeline/signals.py` | Signal extraction — reconstruct feedback turns from raw logs |
+| 2 | `pipeline/prefilter.py` | Pre-filter — deduplication and quality thresholds |
+| 3 | `pipeline/miner.py` | Miner Agent — extract failure/success reasons per turn |
+| 4 | `pipeline/judge.py` | Judge Agent — 5-axis quality scoring |
+| 5 | `pipeline/qa_full_scan.py` | QA Full Scan — remove duplicates and edge cases |
 
 The main orchestrator is `pipeline/pipeline.py`.
