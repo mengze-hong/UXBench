@@ -1,7 +1,7 @@
 UXBench Research-Only License Agreement
 Version 1.1, June 2026
 
-Copyright (c) 2026 Zehong Meng and The UXBench Authors.
+Copyright (c) 2026 Mengze Hong and The UXBench Authors.
 All rights reserved.
 
 IMPORTANT — READ CAREFULLY BEFORE USING THIS WORK.
@@ -14,7 +14,7 @@ agree, you must not use, download, or access the Work.
 1.  DEFINITIONS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-"Licensor"    Zehong Meng, The Hong Kong Polytechnic University, and any
+"Licensor"    Mengze Hong, The Hong Kong Polytechnic University, and any
               co-authors of the associated publication.
 
 "Work"        The UXBench benchmark, including but not limited to: all
@@ -144,7 +144,7 @@ the Work must include the following citation:
 
     @article{meng2026uxbench,
       title   = {UXBench: Benchmarking User Experience in AI Assistants},
-      author  = {Meng, Zehong},
+      author  = {Hong, Mengze},
       year    = {2026},
       url     = {https://arxiv.org/abs/2606.09570}
     }
@@ -243,7 +243,7 @@ subsequent breach.
 For licensing inquiries, permission requests, or to report privacy
 concerns, contact:
 
-    Zehong Meng
+    Mengze Hong
     The Hong Kong Polytechnic University
     Email: mengze.hong@connect.polyu.hk
     Co-contact: zeyanglei@gmail.com
@@ -255,5 +255,5 @@ BY USING, DOWNLOADING, OR ACCESSING THE WORK IN ANY WAY, YOU CONFIRM
 THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE LEGALLY BOUND BY ALL
 TERMS AND CONDITIONS OF THIS LICENSE AGREEMENT.
 
-Copyright (c) 2026 Zehong Meng, The Hong Kong Polytechnic University.
+Copyright (c) 2026 Mengze Hong, The Hong Kong Polytechnic University.
 All rights reserved.
