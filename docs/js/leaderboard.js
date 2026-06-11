@@ -230,11 +230,10 @@ function showTab(tab) {
 }
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
-  renderTask1(TASK1_DATA);
   renderTask2(TASK2_DATA);
   renderTask3(TASK3_DATA);
 
-  // sort headers (works for all 3 tables via data-task attribute)
+  // sort headers (works for all tables via data-task attribute)
   document.querySelectorAll("th.sortable").forEach(th => {
     th.addEventListener("click", () => {
       const task = parseInt(th.closest("table").dataset.task);
@@ -244,7 +243,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // search boxes
   const searches = [
-    { id: "search-t1", task: 1 },
     { id: "search-t2", task: 2 },
     { id: "search-t3", task: 3 },
   ];
