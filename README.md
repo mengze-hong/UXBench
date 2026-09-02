@@ -4,6 +4,8 @@
 
 [![Paper](https://img.shields.io/badge/arXiv-2606.09570-b31b1b?style=flat-square&logo=arxiv)](https://arxiv.org/abs/2606.09570) [![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Dataset-orange?style=flat-square)](https://huggingface.co/datasets/mengze-hong/UXBench) [![GRM](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Model-orange?style=flat-square)]([https://huggingface.co/datasets/mengze-hong/UXBench](https://huggingface.co/mengze-hong/UXBench-GRM)) [![Leaderboard](https://img.shields.io/badge/%F0%9F%8F%86%20Leaderboard-Live-green?style=flat-square)](https://mengze-hong.github.io/UXBench) [![License](https://img.shields.io/badge/License-Research%20Only-red?style=flat-square)](LICENSE) [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square)](https://python.org)
 
+**UXBench is accepted at EMNLP 2026 (main conference)**
+
 **[🏆 Leaderboard](https://mengze-hong.github.io/UXBench) · [📄 Paper](https://arxiv.org/abs/2606.09570) · [🤗 Dataset](https://huggingface.co/datasets/mengze-hong/UXBench)**
 
 </div>
