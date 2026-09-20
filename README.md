@@ -1,15 +1,14 @@
 <div align="center">
 
+<img src="assets/figures/uxbench-emnlp-2026-banner.png" width="100%" alt="UXBench accepted at EMNLP 2026" />
+
+
 <h1 align="center"><img src="docs/img/yuanbao-logo.png" width="36" alt="Yuanbao" style="vertical-align: middle;" />&nbsp; UXBench: Benchmarking User Experience in AI Assistants</h1>
 
-[![Paper](https://img.shields.io/badge/arXiv-2606.09570-b31b1b?style=flat-square&logo=arxiv)](https://arxiv.org/abs/2606.09570) [![Leaderboard](https://img.shields.io/badge/%F0%9F%8F%86%20Leaderboard-Live-green?style=flat-square)](https://mengze-hong.github.io/UXBench)
+**News:** UXBench is accepted at **EMNLP 2026 Main Conference**
 
-**UXBench is accepted at EMNLP 2026 (main conference)**
 
-</div>
-
-<div align="center">
-  <img src="assets/figures/uxbench-emnlp-2026-banner.png" width="100%" alt="UXBench accepted at EMNLP 2026" />
+[![Paper](https://img.shields.io/badge/arXiv-2606.09570-b31b1b?style=flat-square&logo=arxiv)](https://arxiv.org/abs/2606.09570) [![Leaderboard](https://img.shields.io/badge/%F0%9F%8F%86%20Leaderboard-Live-green?style=flat-square)](https://mengze-hong.github.io/UXBench) [![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Dataset-orange?style=flat-square)](https://huggingface.co/datasets/mengze-hong/UXBench)
 </div>
 
 ---
