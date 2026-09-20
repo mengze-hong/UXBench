@@ -1,13 +1,15 @@
 <div align="center">
 
-# <img src="docs/img/yuanbao-logo.png" width="36" alt="" style="vertical-align:middle"/> &nbsp;UXBench: Benchmarking User Experience in AI Assistants
+<h1 align="center"><img src="docs/img/yuanbao-logo.png" width="36" alt="Yuanbao" style="vertical-align: middle;" />&nbsp; UXBench: Benchmarking User Experience in AI Assistants</h1>
 
-[![Paper](https://img.shields.io/badge/arXiv-2606.09570-b31b1b?style=flat-square&logo=arxiv)](https://arxiv.org/abs/2606.09570) [![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Dataset-orange?style=flat-square)](https://huggingface.co/datasets/mengze-hong/UXBench) [![GRM](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Model-orange?style=flat-square)]([https://huggingface.co/datasets/mengze-hong/UXBench](https://huggingface.co/mengze-hong/UXBench-GRM)) [![Leaderboard](https://img.shields.io/badge/%F0%9F%8F%86%20Leaderboard-Live-green?style=flat-square)](https://mengze-hong.github.io/UXBench) [![License](https://img.shields.io/badge/License-Research%20Only-red?style=flat-square)](LICENSE) [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square)](https://python.org)
+[![Paper](https://img.shields.io/badge/arXiv-2606.09570-b31b1b?style=flat-square&logo=arxiv)](https://arxiv.org/abs/2606.09570) [![Leaderboard](https://img.shields.io/badge/%F0%9F%8F%86%20Leaderboard-Live-green?style=flat-square)](https://mengze-hong.github.io/UXBench)
 
 **UXBench is accepted at EMNLP 2026 (main conference)**
 
-**[🏆 Leaderboard](https://mengze-hong.github.io/UXBench) · [📄 Paper](https://arxiv.org/abs/2606.09570) · [🤗 Dataset](https://huggingface.co/datasets/mengze-hong/UXBench)**
+</div>
 
+<div align="center">
+  <img src="assets/figures/uxbench-emnlp-2026-banner.png" width="100%" alt="UXBench accepted at EMNLP 2026" />
 </div>
 
 ---
@@ -169,16 +171,6 @@ python -m uvicorn tools.dashboard.app:app --port 8512
   url           = {https://arxiv.org/abs/2606.09570}
 }
 ```
-
----
-
-## 🔒 Data Statement
-
-**Data source:** The dataset is derived from the Tencent Yuanbao Optimization Program (元宝优化计划), a user feedback initiative where participants voluntarily provided interaction logs for service improvement purposes. All data collection and release procedures comply with applicable privacy regulations and the terms of the program.
-
-**Content warning:** As the dataset reflects real user interactions, it may contain offensive language, profanity, violence, or other sensitive content. Please use with caution.
-
-**Privacy:** This dataset may include information derived from real users. While efforts have been made to anonymize sensitive data, privacy risks may remain. You must not use this dataset to identify, re-identify, contact, profile, track, or infer the identity of any individual. Use of this dataset indicates your agreement to comply with all applicable privacy, data protection, and research ethics requirements.
 
 ---
 
