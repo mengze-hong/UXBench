@@ -86,8 +86,11 @@ python scripts/grm_judge/run_grm_judge_task2.py --endpoint http://<NODE_IP>:8021
 ## Task 3: UX Recovery — GRM Judge
 
 **Input:** `experiments/results/task3/responses/<model_key>.jsonl`  
-Each file contains recovery responses. Records must include `user_complaint` and
-`generated_response` fields (plus optional `history`, `failed_response`).
+Each file contains recovery responses. Records from `run_eval.py` include
+`user_complaint` and `recovery_response` (plus optional `history`, `failed_response`).
+Legacy inputs with only `generated_response` are also accepted. If both response
+fields exist, `recovery_response` takes precedence, including when it is empty.
+Records explicitly marked `ok: false` are skipped rather than grading an old response.
 
 **Output:** `experiments/results/task3/grm_judge/judge_<model>.jsonl`
 

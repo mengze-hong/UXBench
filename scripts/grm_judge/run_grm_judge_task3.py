@@ -105,6 +105,21 @@ class GRMResult:
     error: str = ""
 
 
+def get_recovery_response(rec: dict) -> str:
+    """Read runner output, with compatibility for legacy judge input.
+
+    A present recovery_response takes precedence even when empty, so a
+    failed generation cannot fall back to a stale generated_response.
+    """
+    if rec.get("ok") is False:
+        return ""
+    if "recovery_response" in rec:
+        response = rec["recovery_response"]
+    else:
+        response = rec.get("generated_response")
+    return response if isinstance(response, str) else ""
+
+
 def build_grm_prompt(rec: dict,
                      max_failed_chars: int = 0,
                      max_complaint_chars: int = 0,
@@ -112,11 +127,11 @@ def build_grm_prompt(rec: dict,
     """构建 GRM judge prompt，针对 task3 投诉挽回场景。
 
     历史对话仅放上一轮的 AI 失败回复；用户问题用 user_complaint；
-    AI助手回复用 generated_response (即 recovery response)。
+    AI助手回复用 recovery_response，兼容旧输入的 generated_response。
     """
     failed_response = rec.get("failed_response", "") or ""
     user_complaint = rec.get("user_complaint", "") or ""
-    response_text = rec.get("generated_response", "") or ""
+    response_text = get_recovery_response(rec)
 
     if max_failed_chars > 0 and len(failed_response) > max_failed_chars:
         failed_response = failed_response[:max_failed_chars] + "...[截断]"
@@ -312,7 +327,7 @@ def judge_model(model_tag: str, endpoint: str, grm_model_name: str,
     for rec in records:
         if rec.get("cid") in done_cids:
             continue
-        resp_text = rec.get("generated_response", "") or ""
+        resp_text = get_recovery_response(rec)
         if not resp_text.strip() or "__ERROR__" in resp_text:
             skipped_no_resp += 1
             continue

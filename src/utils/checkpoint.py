@@ -8,21 +8,25 @@ Usage:
     from utils.checkpoint import load_done_cids, append_record, load_judge_done
 """
 
+from __future__ import annotations
+
 import json
 from pathlib import Path
 from threading import Lock
 
 
-def load_done_cids(path: str | Path) -> set[str]:
+def load_done_cids(path: str | Path, *, response_field: str | None = None) -> set[str]:
     """
     Load the set of completed cids from an existing results JSONL file.
 
-    A record is considered complete if it has a non-None value in either
-    the 'predicted' field (run_eval.py output) or the legacy 'verdict' field.
+    By default, a record is complete if it has a non-None 'predicted'
+    or legacy 'verdict'. For generation, pass response_field to require
+    ok=True and a nonempty, non-error response in that field instead.
 
     Parameters
     ----------
     path : Path to the results JSONL file
+    response_field : Generation response field, or None for judge records
 
     Returns
     -------
@@ -40,8 +44,17 @@ def load_done_cids(path: str | Path) -> set[str]:
         try:
             r = json.loads(line)
             cid = r.get("cid")
-            # Accept either field name used by different eval scripts
-            finished = r.get("predicted") is not None or r.get("verdict") is not None
+            if response_field is None:
+                # Preserve the existing completion rules for judge records.
+                finished = r.get("predicted") is not None or r.get("verdict") is not None
+            else:
+                response = r.get(response_field)
+                finished = (
+                    r.get("ok") is True
+                    and isinstance(response, str)
+                    and bool(response.strip())
+                    and "__ERROR__" not in response
+                )
             if cid and finished:
                 done.add(cid)
         except Exception:

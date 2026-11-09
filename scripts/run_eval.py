@@ -260,7 +260,7 @@ def run_task2(args, cfg: dict):
     out_file     = output_dir / "results.jsonl"
 
     samples   = load_jsonl(testset_path)
-    done_cids = load_done_cids(out_file)
+    done_cids = load_done_cids(out_file, response_field="generated_response")
     if done_cids:
         before  = len(samples)
         samples = [s for s in samples if s.get("cid") not in done_cids]
@@ -341,7 +341,7 @@ def run_task3(args, cfg: dict):
     out_file     = output_dir / "results.jsonl"
 
     samples   = load_jsonl(testset_path)
-    done_cids = load_done_cids(out_file)
+    done_cids = load_done_cids(out_file, response_field="recovery_response")
     if done_cids:
         before  = len(samples)
         samples = [s for s in samples if s.get("cid") not in done_cids]
